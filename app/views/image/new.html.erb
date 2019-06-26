@@ -1,0 +1,30 @@
+<h1>Save Image</h1>
+
+
+<%= form_with scope: :image, url: image_index_path do |form| %>
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+   
+    <p>
+      <%= form.label :URL %><br>
+      <%= form.text_area :image_url %>
+    </p>
+   
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+
+  <p> 
+      <% if @image.nil? %>
+        <p> Welcome!  Please enter an image name and URL. </p>
+      <% elsif @image.errors.any? %>
+        <p> Hi! You have errors. </p><br>
+        <%= @image.errors.messages %>
+      <% else %>
+        <p> Hi! You have no errors.  Lucky you! </p><br>
+      <% end %>
+  </p>
+
