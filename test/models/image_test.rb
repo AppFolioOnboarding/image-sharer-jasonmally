@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class ImageTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   test "Image 1. An image with no text or URL should not be accepted" do
     img = Image.new
     assert_not img.valid?
