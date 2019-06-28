@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ImageControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image = Image.create!(name: "Test Image", image_url: "https://pixy.org/src/456/4564782.jpeg")
+    @image = Image.create!(name: 'Test Image', image_url: 'https://pixy.org/src/456/4564782.jpeg')
   end
 
   def test_home
@@ -19,18 +19,17 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
 
   def test_create_success
     assert_difference('Image.count', 1) do
-      image_params =  { name: 'Second Test Image', image_url: "https://i.imgur.com/CAujwlD.jpg"}
-      post image_index_path, params: { image: image_params}
+      image_params = { name: 'Second Test Image', image_url: 'https://i.imgur.com/CAujwlD.jpg' }
+      post image_index_path, params: { image: image_params }
     end
     assert_redirected_to image_path(Image.last)
   end
 
   def test_create_fail
     assert_no_difference('Image.count') do
-      image_params =  { name: 'Second Test Image', image_url: "hts://i.imgur.com/CAujwlD.jpg"}
-      post image_index_path, params: { image: image_params}
+      image_params = { name: 'Second Test Image', image_url: 'hts://i.imgur.com/CAujwlD.jpg' }
+      post image_index_path, params: { image: image_params }
     end
     assert_response :unprocessable_entity
   end
-
 end
