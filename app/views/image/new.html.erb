@@ -18,13 +18,13 @@
   <% end %>
 
   <p> 
-      <% if @image.nil? %>
-        <p> Welcome!  Please enter an image name and URL. </p>
-      <% elsif @image.errors.any? %>
-        <p> Hi! You have errors. </p><br>
-        <%= @image.errors.messages %>
-      <% else %>
-        <p> Hi! You have no errors.  Lucky you! </p><br>
-      <% end %>
-  </p>
-
+    <% if @image.nil? %>
+      <p> Welcome!  Please enter an image name and URL. </p>
+    <% elsif @image.errors.any? %>
+      <p> Hi! You have errors. </p><br>
+      <%= @image.errors.messages %>
+    <% else %>
+      <p> Hi! You have no errors.  Lucky you! </p><br>
+    <% end %>
+  </p><br>
+  <a href="/">Check out the chicken index!</a><br>
