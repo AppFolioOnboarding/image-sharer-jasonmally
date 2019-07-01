@@ -19,7 +19,7 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
 
   def test_create_success
     assert_difference('Image.count', 1) do
-      image_params = { name: 'Second Test Image', image_url: 'https://i.imgur.com/CAujwlD.jpg', tag_list: 'a, b' }
+      image_params = { name: 'Test Image 2', image_url: 'https://i.imgur.com/CAujwlD.jpg', tag_list: 'a, b' }
       post image_index_path, params: { image: image_params }
     end
     assert_redirected_to image_path(Image.last)
