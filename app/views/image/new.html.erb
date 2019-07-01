@@ -10,6 +10,11 @@
       <%= form.label :URL %><br>
       <%= form.text_area :image_url %>
     </p>
+
+    <p>
+      <%= form.label :Tags %><br>
+      <%= form.text_area :tag_list %>
+    </p>
    
     <p>
       <%= form.submit %>
@@ -25,5 +30,5 @@
     <% else %>
       <p> Hi! You have no errors.  Lucky you! </p><br>
     <% end %>
-  </p><br>
+  </p>
   <a href="/">Check out the chicken index!</a><br>
