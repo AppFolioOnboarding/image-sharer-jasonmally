@@ -2,11 +2,7 @@
 
 <a href="/image/new">Submit chicken photos of your own!</a><br>
   <p>
-    <% Image.all.entries.reverse.each do | img | %>
-      <% if not img.nil? %>
-        <img src=<%= img.image_url %> alt=<%= img.name %> height="400" width="400"><br>
-      <% end %>
-    <% end %>
+  <%= render 'display' %>
   </p>
 
 

@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ImageControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @image = Image.create!(name: 'Test Image', image_url: 'https://pixy.org/src/456/4564782.jpeg')
+    @image = Image.create!(name: 'TestImg1', image_url: 'https://'\
+    'i.imgur.com/CAujwlD.jpg', tag_list: 'a, b')
   end
 
   def test_home
@@ -17,14 +18,45 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
     assert_select '#header', 'Save Image'
   end
 
+  def test_tag_search
+    get tagged_path('a')
+    assert_response :ok
+    assert_select '#header', 'Tagged Images'
+  end
+
+  def test_tag_search_none_found
+    # we should still successfully reach the page
+    get tagged_path('g')
+    assert_response :ok
+    assert_select '#header', 'Tagged Images'
+  end
+
   def test_create_success
     assert_difference('Image.count', 1) do
-      image_params = { name: 'Test Image 2', image_url: 'https://i.imgur.com/CAujwlD.jpg', tag_list: 'a, b' }
+      image_params = { name: 'TestImg2', image_url: 'https://i.imgur.com/CAujwlD.jpg', tag_list: 'a, b' }
       post image_index_path, params: { image: image_params }
     end
     assert_redirected_to image_path(Image.last)
     follow_redirect!
     assert_select '#tags', 'Tags: a, b'
+  end
+
+  def test_create_success_check_tag
+    assert_difference('Image.count', 1) do
+      image_params = { name: 'TestImg3', image_url: 'https://i.imgur.com/CAujwlD.jpg', tag_list: 'c, b' }
+      post image_index_path, params: { image: image_params }
+    end
+    assert_redirected_to image_path(Image.last)
+    follow_redirect!
+    assert_select '#tags', 'Tags: c, b'
+
+    # now we check whether we can navigate to the tagged images page after posting image
+    get tagged_path('b')
+    assert_response :ok
+
+    # now we check whether both images tagged 'b' are present
+    assert_select '#TestImg1', 'Tags: a, b'
+    assert_select '#TestImg3', 'Tags: c, b'
   end
 
   def test_create_fail

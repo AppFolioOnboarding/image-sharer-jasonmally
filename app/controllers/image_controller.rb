@@ -17,6 +17,14 @@ class ImageController < ApplicationController
     @image = Image.find(valid_image_shown)
   end
 
+  def index
+    @images = Image.all
+  end
+
+  def tagged
+    @images = (Image.tagged_with(params[:tag]) if params[:tag].present?)
+  end
+
   private
 
   def valid_image_params
