@@ -20,7 +20,7 @@ class ImageController < ApplicationController
   private
 
   def valid_image_params
-    params.require(:image).permit(:name, :image_url)
+    params.require(:image).permit(:name, :image_url, :tag_list)
   end
 
   def valid_image_shown
