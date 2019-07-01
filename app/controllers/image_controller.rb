@@ -13,6 +13,12 @@ class ImageController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(valid_image_shown)
+    @image.destroy
+    redirect_to root_path
+  end
+
   def show
     @image = Image.find(valid_image_shown)
   end
