@@ -5,6 +5,11 @@
     <% Image.all.entries.reverse.each do | img | %>
       <% if not img.nil? %>
         <img src=<%= img.image_url %> alt=<%= img.name %> height="400" width="400"><br>
+        <% if not img.tag_list.nil? %>
+          <p id=<%= img.name %>>
+            Tags: <%= raw(img.tag_list.map { |t| link_to t, tagged_path(t) }.join(', ')) %> 
+          </p><br>
+        <% end %>
       <% end %>
     <% end %>
   </p>
