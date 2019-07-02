@@ -14,8 +14,15 @@ class ImageController < ApplicationController
   end
 
   def destroy
-    @image = Image.find(valid_image_shown)
+    begin
+      @image = Image.find(valid_image_shown)
+    rescue ActiveRecord::RecordNotFound
+      @images = Image.all
+      render 'index'
+      return
+    end
     @image.destroy
+    @images = Image.all
     redirect_to root_path
   end
 

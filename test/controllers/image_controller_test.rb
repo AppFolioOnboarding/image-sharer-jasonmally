@@ -75,4 +75,13 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select '#TestImg1', false
   end
+
+  def test_delete_failure
+    get root_path
+    assert_no_difference('Image.count') do
+      # this fails because no image has id = 12
+      delete image_path(12)
+    end
+    assert_select '#TestImg1', 'Tags: a, b'
+  end
 end
