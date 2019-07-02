@@ -66,4 +66,22 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
   end
+
+  def test_delete_success
+    assert_difference('Image.count', -1) do
+      delete image_path(980_190_963)
+    end
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_select '#TestImg1', false
+  end
+
+  def test_delete_failure
+    get root_path
+    assert_no_difference('Image.count') do
+      # this fails because no image has id = 12
+      delete image_path(12)
+    end
+    assert_select '#TestImg1', 'Tags: a, b'
+  end
 end
