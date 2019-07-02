@@ -21,7 +21,7 @@ class ImageController < ApplicationController
       render 'index'
       return
     end
-    @image.destroy
+    @image.destroy!
     @images = Image.all
     redirect_to root_path
   end
