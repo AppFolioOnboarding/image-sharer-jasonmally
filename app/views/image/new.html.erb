@@ -25,8 +25,19 @@
     <% if @image.nil? %>
       <p> Welcome!  Please enter an image name and URL. </p>
     <% elsif @image.errors.any? %>
-      <p> Hi! You have errors. </p><br>
-      <%= @image.errors.messages %>
+      <p> Hi! You have errors. </p>
+      <% if @image.errors[:name].any? %>
+        <%= @image.errors[:name][0] %><br>
+      <% end %>
+      <% if @image.errors[:image_url].any? %>
+        <%= @image.errors[:image_url][0] %><br>
+        <% unless @image.errors[:image_url][1].nil? %>
+          <%= @image.errors[:image_url][1] %><br>
+          <% end %>
+      <% end %>
+      <% if @image.errors[:tag_list].any? %>
+        <%= @image.errors[:tag_list][0] %><br>
+      <% end %>
     <% else %>
       <p> Hi! You have no errors.  Lucky you! </p><br>
     <% end %>

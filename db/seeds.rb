@@ -45,9 +45,7 @@ image_list = [['Brahma', 'https://www.townlinehatchery.com/'\
               ['Barred Rock Chick', 'https://www.mcmurrayhatchery.com/'\
               'images/global/mc/McMurrayHatchery_BarredRock_BabyChick.jpg'],
               ['Silkie Chick', 'http://cdn.hasshe.com/'\
-              'img/s/_NmoJS_httOp0SB9X_0r4QHaG8.jpg'],
-              ['Sleeping Chick', 'http://lifeskillsandmore.org/'\
-              'wp-content/uploads/2016/11/Sleeping-Chick--300x294.jpg']]
+              'img/s/_NmoJS_httOp0SB9X_0r4QHaG8.jpg']]
 
 image_list.each do |saved_name, saved_url|
   Image.create(name: saved_name, image_url: saved_url)

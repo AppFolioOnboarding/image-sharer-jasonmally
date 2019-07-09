@@ -1,10 +1,12 @@
 <% @images.all.entries.reverse.each do | img | %>
     <% if img %>
+    <a href=<%= image_path(img) %>>
       <img src=<%= img.image_url %> alt=<%= img.name %> height="400" width="400"><br>
       <% if img.tag_list %>
         <p id=<%= img.name %>>
           Tags: <%= raw(img.tag_list.map { |t| link_to t, tagged_path(t) }.join(', ')) %> 
         </p><br>
       <% end %>
+      </a>
     <% end %>
   <% end %>

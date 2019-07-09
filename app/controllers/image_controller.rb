@@ -30,6 +30,17 @@ class ImageController < ApplicationController
     @image = Image.find(valid_image_shown)
   end
 
+  def edit
+    @image = Image.find(valid_image_shown)
+    render 'update'
+  end
+
+  def update
+    @image = Image.find(valid_image_shown)
+    @image.update(tag_list: params[:image]['tag_list'])
+    render 'show'
+  end
+
   def index
     @images = Image.all
   end
