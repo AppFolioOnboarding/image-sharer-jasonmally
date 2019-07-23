@@ -37,6 +37,10 @@ class ImageController < ApplicationController
 
   def update
     @image = Image.find(valid_image_shown)
+    if params[:image]['tag_list'].empty?
+      render 'show', status: :unprocessable_entity
+      return
+    end
     @image.update(tag_list: params[:image]['tag_list'])
     render 'show'
   end
