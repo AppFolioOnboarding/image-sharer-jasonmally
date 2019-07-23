@@ -69,7 +69,7 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
 
   def test_edit_success
     assert_no_difference('Image.count') do
-      image_params = { tag_list: 'test, image, tags'}
+      image_params = { tag_list: 'test, image, tags' }
       patch image_path(980_190_963), params: { image: image_params }
     end
     assert_response :ok
@@ -78,7 +78,7 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
 
   def test_edit_failure
     assert_no_difference('Image.count') do
-      image_params = { tag_list: ''}
+      image_params = { tag_list: '' }
       patch image_path(980_190_963), params: { image: image_params }
     end
     assert_response :unprocessable_entity
