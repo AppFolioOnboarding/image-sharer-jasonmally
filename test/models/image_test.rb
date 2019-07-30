@@ -28,8 +28,15 @@ class ImageTest < ActiveSupport::TestCase
     assert_equal 'This image URL is invalid.', img.errors.messages[:image_url].first
   end
 
-  def test_valid_image
+  def test_image_no_tags
     img = Image.new(name: 'Finally!', image_url: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg')
+    assert_not img.valid?
+    assert_equal 'You cannot submit an image with no tags!', img.errors.messages[:tag_list].first
+
+  end
+
+  def test_valid_image
+    img = Image.new(name: 'Finally!', image_url: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg', tag_list: 'Hi, there')
     assert img.valid?
   end
 end
