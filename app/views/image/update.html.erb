@@ -1,0 +1,18 @@
+<h1 id="header">Update Your Image</h1>
+<img src=<%= @image.image_url %> alt=<%= @image.name %> > <br>
+<%= form_with scope: :image, url: image_path(@image.id), method: :patch do |form| %>
+
+    <p>
+      <%= form.label :Tags %><br>
+      <%= form.text_area :tag_list %>
+    </p>
+   
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+<p id="tags">Tags: <%= raw(@image.tag_list.map { |t| link_to t, tagged_path(t) }.join(', ')) %> </p>
+<tr>
+  <td> <%= link_to 'Submit chicken photos of your own!', new_image_path %> </td><br>
+  <td> <%= link_to 'Delete', image_path(@image), method: :delete, data: { confirm: 'Are you sure you want to delete this photo?'} %></td>
+</tr>

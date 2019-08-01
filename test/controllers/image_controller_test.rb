@@ -59,12 +59,30 @@ class ImageControllerTest < ActionDispatch::IntegrationTest
     assert_select '#TestImg3', 'Tags: c, b'
   end
 
-  def test_create_fail
+  def test_create_failure
     assert_no_difference('Image.count') do
       image_params = { name: 'Second Test Image', image_url: 'hts://i.imgur.com/CAujwlD.jpg' }
       post image_index_path, params: { image: image_params }
     end
     assert_response :unprocessable_entity
+  end
+
+  def test_edit_success
+    assert_no_difference('Image.count') do
+      image_params = { tag_list: 'test, image, tags' }
+      patch image_path(980_190_963), params: { image: image_params }
+    end
+    assert_response :ok
+    assert_select '#tags', 'Tags: test, image, tags'
+  end
+
+  def test_edit_failure
+    assert_no_difference('Image.count') do
+      image_params = { tag_list: '' }
+      patch image_path(980_190_963), params: { image: image_params }
+    end
+    assert_response :unprocessable_entity
+    assert_select '#tags', 'Tags: a, b'
   end
 
   def test_delete_success
