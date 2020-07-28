@@ -1,4 +1,9 @@
 <h1 id="header">Your Image</h1>
+<% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>
 <img src=<%= @image.image_url %> alt=<%= @image.name %> > <br>
 <p id="tags">Tags: <%= raw(@image.tag_list.map { |t| link_to t, tagged_path(t) }.join(', ')) %> </p>
 <tr>

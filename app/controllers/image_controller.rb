@@ -7,7 +7,7 @@ class ImageController < ApplicationController
     @image = Image.new(valid_image_params)
     if @image.valid?
       @image.save
-      redirect_to @image
+      redirect_to @image, notice: "Image saved successfully!"
     else
       render 'new', status: :unprocessable_entity
     end
